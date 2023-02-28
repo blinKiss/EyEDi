@@ -7,7 +7,6 @@ import pandas as pd
 
 # 각 사람의 성적합계를 구하고
 # name math kor tot 컬럼으로 저장
-# score_sum.csv
 data = {
     'name' : ['Kim', 'Choi', 'Yoon'],
     'math' : [90, 80, 70],
@@ -16,9 +15,7 @@ data = {
 
 df = pd.DataFrame(data)
 df['tot'] = df.sum(axis=1)
+
+# score_sum.csv
 df.to_csv('./data/score_sum.csv', index=False)
 print(df)
-
-
-
-

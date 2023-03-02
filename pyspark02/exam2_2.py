@@ -42,3 +42,5 @@ air_df = pd.DataFrame({
     '중앙값' : median
 })
 print(air_df)
+
+# air_df.to_csv('./EyEDi/data/서울시_자치구별_일간_미세먼지_평균_2020.01~04.csv', index=False)

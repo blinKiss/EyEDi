@@ -1,5 +1,4 @@
 import pandas as pd
-
 # name math kor
 # kim 90 100
 # choi 80 90

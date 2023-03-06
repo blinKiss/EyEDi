@@ -36,3 +36,4 @@ print(df2)
 # df2.to_csv('./EyEDi/data/서울시_자치구별_일간_미세먼지_평균_2020.01.csv', index=False)
 # print(df2)
 
+

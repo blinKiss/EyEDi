@@ -13,7 +13,7 @@ y = [90, 80, 90, 60, 70]
 y2 = [80, 90, 60, 70, 90]
 name = ['Kim', 'Lee', 'Park', 'Choi', 'Jeong']
 
-plt.bar(x - 0.08, y, width = 0.17)
-plt.bar(x + 0.09, y2, width = 0.17)
+plt.bar(x - 0.15, y, width = 0.3)
+plt.bar(x + 0.15, y2, width = 0.3)
 plt.xticks(x, name)
 plt.show()

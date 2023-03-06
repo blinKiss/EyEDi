@@ -16,7 +16,7 @@ name = ['유재석', '박명수', '정준하', '정형돈', '노홍철']
 plt.barh(x - 0.2, moral, height = 0.2, label = '도덕', color='skyblue')
 plt.barh(x, kor, height = 0.2, label = '국어', color='blueviolet')
 plt.barh(x + 0.2, math, height = 0.2, label = '수학', color='orchid')
-plt.xlabel('예능성적')
+plt.xlabel('예능성적표')
 plt.yticks(x, name)
 plt.legend()
 plt.show()

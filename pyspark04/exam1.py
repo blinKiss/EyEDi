@@ -1,42 +1,28 @@
-# figure 사용해서 그래프를 두개 만들고
-# sin 그래프 그리고
-# cos 그래프 그리시오
-
 import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
 import numpy as np
+import pandas as pd
 
-# 윈도우 시스템 창 이름
-fig = plt.figure("radian sin / cos")
+font_path = 'C:/Windows/Fonts/gulim.ttc'
+font = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font)
 
-# 그래프 제목 타이틀
-fig.suptitle('radian', fontsize=20)
+df = pd.read_csv('./EyEDi/data/해양수산부_해수욕장 개폐장일정_20220830.csv')
 
-# subplots_adjust(창과 plot의 거리 = 1에 가까울 수록 붙음)
-fig.subplots_adjust(top=0.8)
+# 2021년 중에서 시도별 해수욕장갯수를 구해서 막대그래프로 출력하시오
 
+df.columns = ['연도', '시도', '시군구', '해수욕장명', '개장일', '폐장일']
+df2021 = df[df['연도'] == 2021]
+df_cities = df2021['시도'].drop_duplicates()
+# print(df2021)
+# print(df_cities)
+df_beach = [len(df2021[df2021['시도'] == city]) for city in df_cities]
+beaches = sorted(df_beach, reverse=True)
+cities = ['강원도', '전라남도', '충청남도', '경상남도', '경상북도', '제주특별자치도', '전라북도', '부산시', '인천시', '울산시']
+# print(df_beach)
 
-rad = np.arange(0.0, 2*np.pi, 0.1) # 실수로 증가
-x = np.sin(rad)
-y = np.cos(rad)
-
-plt1 = fig.add_subplot(1,2,1)
-plt2 = fig.add_subplot(1,2,2)
-
-plt1.plot(rad,x, color='red')
-
-# 그래프 소제목 타이틀
-plt1.set_title('rad/sin', fontsize=15)
-# x축과 y축 이름
-plt1.set_xlabel('rad', fontsize=10)
-plt1.set_ylabel('sin', fontsize=10)
-
-plt2.plot(rad,y, color='violet')
-
-
-plt2.set_title('rad/cos', fontsize=15, )
-plt2.set_xlabel('rad', fontsize=10)
-plt2.set_ylabel('cos', fontsize=10)
-
-# plt1과 plt2의 가로 간격 조정 = wspace 세로 = hspace
-plt.subplots_adjust(wspace=0.5)
+x = np.arange(len(cities))
+y = beaches
+plt.bar(x, y)
+plt.xticks(x, cities)
 plt.show()

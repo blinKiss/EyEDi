@@ -1,32 +1,32 @@
 import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
 import numpy as np
-
-# # 윈도우 시스템 창 이름
-# fig = plt.figure("radian sin / cos")
-
-# # 그래프 제목 타이틀
-# fig.suptitle('radian', fontsize=20)
-
-# subplots_adjust(창과 plot의 거리 = 1에 가까울 수록 붙음)
-# fig.subplots_adjust(top=0.8)
-# plt.set_xlabel('rad', fontsize=10)
-# plt.set_ylabel('sin', fontsize=10)
+import pandas as pd
 
 
-rad = np.arange(0.0, 2*np.pi, 0.1) # 실수로 증가
-sin = np.sin(rad)
-cos = np.cos(rad)
-zeroline = 0 * rad
+font_path = 'C:/Windows/Fonts/gulim.ttc'
+font = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font)
 
-plt.plot(rad,sin, color='red', label='Sin')
-plt.plot(rad,cos, color='blue', label='Cos')
-plt.plot(rad,zeroline, color='brown')
-# plt.plot(rad,z, color='blue')
-plt.legend()
+df = pd.read_csv('./EyEDi/data/해양수산부_해수욕장 개폐장일정_20220830.csv')
 
+# 2021년 중에서 시도별 해수욕장갯수를 구해서 막대그래프로 출력하시오
 
-plt.title('Radian : Sin / Cos', loc='right')
+df.columns = ['연도', '시도', '시군구', '해수욕장명', '개장일', '폐장일']
+df2021 = df[df['연도'] == 2021]
+df_cities = df2021['시도'].drop_duplicates()
+# print(df2021)
+# print(df_cities)
+df_beach = [len(df2021[df2021['시도'] == city]) for city in df_cities]
+# print(df_beach)
+# print(df_cities)
+df_zip = sorted(zip(df_cities, df_beach), key=lambda x: x[1], reverse=True)
+# print(df_zip)
+cities = [i[0] for i in df_zip]
+beaches = [j[1] for j in df_zip]
 
-plt.xlabel('Radian')
-plt.ylabel('Sin / Cos')
+x = np.arange(len(df_cities))
+y = beaches
+plt.bar(x, y)
+plt.xticks(x, cities)
 plt.show()

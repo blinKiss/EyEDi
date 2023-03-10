@@ -6,8 +6,6 @@
 import pandas as pd
 import glob as glob
 
-
-
 files = glob.glob('./EyEDi/data/소상공인시장진흥공단_상가(상권)정보_20221231/소상공인*.csv')
 df_total = pd.DataFrame()
 for file in files:

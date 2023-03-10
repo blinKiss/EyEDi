@@ -35,6 +35,7 @@ print(h)
 count = [h, k, s, r, g]
 cc = dict(sorted(zip(company, count), key=lambda x: x[1], reverse=True))
 # print(cc)
+plt.title('제조사별 자동차 결함 신고 수', loc='left')
 plt.pie(cc.values(), labels=cc.keys(), autopct='%.1f%%', startangle=90, counterclock=False)
 plt.show()
 

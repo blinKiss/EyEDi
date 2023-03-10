@@ -22,7 +22,7 @@ sort2 = sort[0:10]
 sort2[['호선', '역명']] = sort2['호선별 역명'].str.split('호선 ', expand=True)
 sort3 = sort2[['호선', '역명', '일별 승차 인원']]
 # print(sort3.columns)
-sort3.rename(columns={'일별 승차 인원':'연간 승차 인원'})
+sort3.rename(columns={'일별 승차 인원':'연간 승차 인원'}, inplace=True)
 sort3 = sort3.reset_index(drop=True)
 sort3.index = sort3.index+1
 sort3 = sort3.rename_axis('순위')

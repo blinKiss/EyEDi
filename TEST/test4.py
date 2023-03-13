@@ -17,7 +17,9 @@ df_in = df2.iloc[:, 6:].fillna(0)
 df2['일별 승차 인원'] = df_in.sum(axis=1)
 
 df3 = df2[['호선', '역명', '일별 승차 인원']]
-staLine = df3.groupby('역명')['호선'].max().reset_index()
+# staLine = df3.groupby('역명')['호선'].max().reset_index()
+staLine = df3.groupby('역명')['호선'].min().reset_index()
+
 
 # print(inAvg)
 sta = df3.groupby('역명').sum().reset_index()

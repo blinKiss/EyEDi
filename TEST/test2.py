@@ -18,7 +18,7 @@ staLine['호선'] = staLine['호선'].astype(str)
 staLine = staLine.groupby('역명')['호선'].sum().reset_index()
 sta = df3.groupby('역명')['일별 승차 인원'].sum().reset_index()
 # print(staLine)
-staLine['연간 승차 인원'] = sta['일별 승차 인원'] 
+staLine['연간 승차 인원'] = sta['일별 승차 인원']
 
 sort = staLine.sort_values(by='연간 승차 인원', ascending=False)
 sort2 = sort[0:10]

@@ -13,17 +13,11 @@ df_in = df2.iloc[:, 6:].fillna(0)
 df2['일별 승차 인원'] = df_in.sum(axis=1)
 
 df3 = df2[['호선', '역명', '일별 승차 인원']]
-df3['호선'] = df3['호선'].astype(str)
-df3['호선별 역명'] = df3['호선'] + '호선 ' + df3['역명']
-
-staLine = df3.groupby('호선별 역명')['일별 승차 인원'].sum().reset_index()
-sort = staLine.sort_values(by='일별 승차 인원', ascending=False)
+df4 = df3.groupby(['호선', '역명']).sum()
+sort = df4.sort_values('일별 승차 인원', ascending=False).reset_index()
+sort.rename(columns={'일별 승차 인원' : '연간 승차 인원'}, inplace=True)
 sort2 = sort[0:10]
-sort2[['호선', '역명']] = sort2['호선별 역명'].str.split('호선 ', expand=True)
-sort3 = sort2[['호선', '역명', '일별 승차 인원']]
-# print(sort3.columns)
-sort3.rename(columns={'일별 승차 인원':'연간 승차 인원'}, inplace=True)
-sort3 = sort3.reset_index(drop=True)
-sort3.index = sort3.index+1
-sort3 = sort3.rename_axis('순위')
-print('연간 승차 인원 수 순위\n', sort3)
+# print(sort2)
+sort2.index = sort2.index+1
+sort2 = sort2.rename_axis('순위')
+print('연간 승차 인원 수 순위\n', sort2)

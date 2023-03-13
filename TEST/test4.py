@@ -17,30 +17,21 @@ df_in = df2.iloc[:, 6:].fillna(0)
 df2['일별 승차 인원'] = df_in.sum(axis=1)
 
 df3 = df2[['호선', '역명', '일별 승차 인원']]
-# staLine = df3.groupby('역명')['호선'].max().reset_index()
-staLine = df3.groupby('역명')['호선'].min().reset_index()
-
-
-# print(inAvg)
-sta = df3.groupby('역명').sum().reset_index()
-sta['호선'] = staLine['호선']
-sort = sorted(zip(sta['역명'], sta['호선'], sta['일별 승차 인원']), key=lambda x: x[2], reverse=True)
-
+df4 = df3.groupby(['호선', '역명']).sum()
+sort = df4.sort_values('일별 승차 인원', ascending=False).reset_index()
+sort.rename(columns={'일별 승차 인원' : '연간 승차 인원'}, inplace=True)
 sort2 = sort[0:10]
-
-sta_top10 = [i[0] for i in sort2]
-line_top10 = [j[1] for j in sort2]
-count_top10 = [k[2] for k in sort2]
+sort2.index = sort2.index+1
+sort2 = sort2.rename_axis('순위')
 
 day = df[['수송일자']].drop_duplicates()
 
-count2_top10 = [c/len(day) for c in count_top10]
+count = [round(c/len(day), 1) for c in sort2.loc[:, '연간 승차 인원']]
+# print(count)
 
-# print(count2_top10)
-
-x = np.arange(len(sta_top10))
-y = count2_top10
+x = np.arange(len(sort2))
+y = count
 plt.title('2022 최다 승차 수 역별 인원과 평균', loc='left')
 plt.bar(x, y)
-plt.xticks(x, sta_top10)
+plt.xticks(x, sort2.loc[:, '역명'])
 plt.show()

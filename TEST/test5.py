@@ -31,7 +31,7 @@ for i in range(len(df_slice)):
         g += df_slice[i]
 # print(x, y)
 company = ['현대', '기아', '쌍용', '르노', '지엠']
-print(h)
+# print(h)
 count = [h, k, s, r, g]
 cc = dict(sorted(zip(company, count), key=lambda x: x[1], reverse=True))
 # print(cc)

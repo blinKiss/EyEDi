@@ -13,10 +13,10 @@ for file in files:
     df_total = pd.concat([df_total, df_temp], ignore_index=True)
 df_slice = df_total[['상호명', '상권업종중분류명']]
 df = df_slice[df_slice['상권업종중분류명'].str.contains('종합소매점')]
-df_m = df[df['상호명'].str.contains('GS25')].count()
-df_b = df[df['상호명'].str.contains('CU')].count()
+df_g = df[df['상호명'].str.contains('GS25')].count()
+df_c = df[df['상호명'].str.contains('CU')].count()
 df_s = df[df['상호명'].str.contains('세븐일레븐')].count()
 
 # print(df_m[1])
 print('전국의 편의점 매장 수\nGS25 : {}, CU : {}, 세븐일레븐 : {}'.
-      format(df_m[1], df_b[1], df_s[1]))
+      format(df_g[1], df_c[1], df_s[1]))
